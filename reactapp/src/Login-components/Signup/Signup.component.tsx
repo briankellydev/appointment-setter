@@ -149,6 +149,7 @@ export class Signup extends React.Component<any, State> {
             fullName: this.state.fullName,
             welcomeMessage: this.state.welcomeMessage
         }
+        localStorage.removeItem('x-auth-token');
         tenantService.createTenant(payload).then(() => {
             this.snackbar = (
                 <MySnackbar variant="success"></MySnackbar>

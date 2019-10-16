@@ -1,8 +1,11 @@
 import axios from 'axios';
 
+const prodUrl = 'https://appointment-setter-bk.herokuapp.com/api';
+const devUrl = 'http://localhost:3000/api'
+
 // Set config defaults when creating the instance
 export const http = axios.create({
-    baseURL: 'https://appointment-setter-bk.herokuapp.com/api'
+    baseURL: devUrl
 });
 
 http.interceptors.request.use((config) => {

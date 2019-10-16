@@ -28,14 +28,15 @@ tenantController.createTenant = async (req, res) => {
         tenantId: tenantId,
         isAdmin: true,
         isPractitioner: false,
-        fullName: req.body.fullName
+        fullName: req.body.fullName,
       }
   }
 
   userController.makeUser(userPayload, res).then(() => {
     tenant = new Tenant({
         tenantId: tenantId,
-        name: req.body.name
+        name: req.body.name,
+        welcomeMessage: req.body.welcomeMessage
     });
     tenant.save().then(() => {
         const token = authController.generateAuthToken(userPayload);

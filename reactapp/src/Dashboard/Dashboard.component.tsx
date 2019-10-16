@@ -61,7 +61,7 @@ export class Dashboard extends React.Component<any, State> {
         globalState.user.pipe(takeUntil(this.destroy$)).subscribe((user: User) => {
             this.setState({user: user}, () => {
                 if (user) {
-                    this.welcomeCardContent = user.appointments.length ? (
+                    this.welcomeCardContent = user.appointments && user.appointments.length ? (
                         <div>{user.appointments.filter((appointment) => {
                             return moment(appointment.start).isAfter(moment().subtract(5, 'days'));
                         }).map((appointment, index) => {
