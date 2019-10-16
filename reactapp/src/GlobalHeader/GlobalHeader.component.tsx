@@ -124,14 +124,14 @@ export class GlobalHeader extends React.Component<any, State> {
         )
     }
 
-    toggleMenu = (event?: any) => {
+    private toggleMenu = (event?: any) => {
         if (event) {
             this.anchorEl = event.currentTarget;
         }
         this.setState({userMenuOpen: !this.state.userMenuOpen});
     }
 
-    toggleDrawer = () => {
+    private toggleDrawer = () => {
         this.setState({sidebarOpen: !this.state.sidebarOpen})
     }
 

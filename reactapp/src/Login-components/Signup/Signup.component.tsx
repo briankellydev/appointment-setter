@@ -1,8 +1,9 @@
 import '../shared.scss';
-import React from 'react';
+import React, { ReactElement } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import TenantService from '../../services/tenant.service';
+import { MySnackbar } from '../../MySnackbar/MySnackbar.component';
 
 const tenantService = new TenantService();
 
@@ -37,15 +38,8 @@ const KEYS = {
 export class Signup extends React.Component<any, State> {
     error: any;
     props: any;
-
-    constructor() {
-        super({}, InitialState);
-        this.state = InitialState;
-    }
-
-    componentDidUpdate() {
-        
-    }
+    state = InitialState;
+    private snackbar: ReactElement;
 
     render() {
         return (
@@ -121,6 +115,7 @@ export class Signup extends React.Component<any, State> {
                         </div>
                     </form>
                     {this.error}
+                    {this.snackbar}
                 </div>
             </div>
         )
@@ -143,7 +138,7 @@ export class Signup extends React.Component<any, State> {
         this.forceUpdate();
     };
 
-    signUp() {
+    private signUp() {
         const payload = {
             email: this.state.username,
             password: this.state.password,
@@ -152,9 +147,24 @@ export class Signup extends React.Component<any, State> {
             welcomeMessage: this.state.welcomeMessage
         }
         tenantService.createTenant(payload).then(() => {
-            this.props.history.push('/');
+            this.snackbar = (
+                <MySnackbar variant="success"></MySnackbar>
+            );
+            this.forceUpdate();
+            setTimeout(() => {
+                this.snackbar = (<span></span>);
+                this.forceUpdate();
+                this.props.history.push('/');
+            }, 2500);
         }).catch(() => {
-            // error
+            this.snackbar = (
+                <MySnackbar variant="error"></MySnackbar>
+            );
+            this.forceUpdate();
+            setTimeout(() => {
+                this.snackbar = (<span></span>);
+                this.forceUpdate();
+            }, 2500);
         });
     }
 }

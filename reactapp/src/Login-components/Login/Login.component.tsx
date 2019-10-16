@@ -1,5 +1,5 @@
 import '../shared.scss';
-import React from 'react';
+import React, { ReactElement } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import LoginService from '../../services/login.service';
@@ -25,14 +25,9 @@ const KEYS = {
 
 export class Login extends React.Component<any, State> {
 
-    state: State;
+    state: State = InitialState;
     props: any;
-    error: any;
-
-    constructor() {
-        super({}, InitialState);
-        this.state = InitialState;
-    }
+    private error: ReactElement;
 
     componentDidMount() {
         if (localStorage.getItem('x-auth-token') && localStorage.getItem('x-auth-token') !== 'undefined') {

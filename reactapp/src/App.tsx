@@ -1,15 +1,7 @@
 import React from 'react';
 import './App.scss';
-import { GlobalHeader } from './GlobalHeader/GlobalHeader.component';
 import globalState from './state-management';
-import TenantService from './services/tenant.service';
-import { UserService } from './services/user.service';
-import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-
-
-const tenantService = new TenantService();
-const userService = new UserService();
 
 export class App extends React.Component<{router: any, history: string[]}, {loading: boolean, initialLoginCheck: boolean}> {
   state = {
@@ -17,7 +9,7 @@ export class App extends React.Component<{router: any, history: string[]}, {load
     initialLoginCheck: false
   };
 
-  destroy$ = new Subject();
+  private destroy$ = new Subject();
 
 
   componentDidMount() {

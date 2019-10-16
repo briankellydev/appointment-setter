@@ -1,5 +1,5 @@
 import './Dashboard.component.scss';
-import React from 'react';
+import React, { ReactElement } from 'react';
 import User from '../interfaces/user.interface';
 import globalState from '../state-management';
 import Tenant from '../interfaces/tenant.interface';
@@ -9,8 +9,6 @@ import { Subject } from 'rxjs';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { Button } from '@material-ui/core';
-
-
 
 interface State {
     tenant: Tenant;
@@ -40,9 +38,9 @@ export class Dashboard extends React.Component<any, State> {
     state: State = InitialState;
 
     private destroy$ = new Subject();
-    headerCardContent: any;
-    welcomeCardContent: any;
-    actionsCardContent: any;
+    private headerCardContent: ReactElement;
+    private welcomeCardContent: ReactElement;
+    private actionsCardContent: ReactElement;
 
     componentDidMount() {
         globalState.tenant.pipe(takeUntil(this.destroy$)).subscribe((tenant: Tenant) => {

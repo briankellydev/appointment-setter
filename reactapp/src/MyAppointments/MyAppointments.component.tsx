@@ -43,13 +43,13 @@ const InitialState: State = {
 const userService = new UserService();
 
 export class MyAppointments extends React.Component<any, State> {
-    user: User;
-    calendarCard: ReactElement;
-    detailsCard: ReactElement;
-    snackbar: ReactElement;
+    
     state = InitialState;
 
     private destroy$ = new Subject();
+    private calendarCard: ReactElement;
+    private detailsCard: ReactElement;
+    private snackbar: ReactElement;
 
     componentDidMount() {
         globalState.user.pipe(takeUntil(this.destroy$)).subscribe((user: User) => {
@@ -82,7 +82,7 @@ export class MyAppointments extends React.Component<any, State> {
         )
     }
 
-    handleClick(event: any) {
+    private handleClick(event: any) {
         const selectedAppointment = this.state.user.appointments.find((appointment) => {
             return moment(appointment.start).toISOString() === moment(event.event.start).toISOString();
         });
@@ -92,7 +92,7 @@ export class MyAppointments extends React.Component<any, State> {
         });
     }
 
-    renderCalendar() {
+    private renderCalendar() {
         this.calendarCard = (
             <FullCalendar
             defaultView="timeGridWeek"
@@ -106,7 +106,7 @@ export class MyAppointments extends React.Component<any, State> {
         );
     }
 
-    renderDetails(confirm = false) {
+    private renderDetails(confirm = false) {
         this.detailsCard = this.state.selectedAppointment.start ? (
             <div>
                 <div className="text-bold">
@@ -141,18 +141,18 @@ export class MyAppointments extends React.Component<any, State> {
         ) : (<div>Please select an appointment from the left.</div>)
     }
 
-    getUser() {
+    private getUser() {
         userService.getCurrentUser().then((resp: {data: User}) => {
             globalState.user.next(resp.data);
         });
     }
 
-    cancelAppointment() {
+    private cancelAppointment() {
         this.renderDetails(true);
         this.forceUpdate();
     }
 
-    confirmCancel() {
+    private confirmCancel() {
         userService.cancelAppointment(this.state.selectedAppointment).then(() => {
             this.snackbar = (
                 <MySnackbar variant="success"></MySnackbar>

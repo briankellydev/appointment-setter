@@ -49,15 +49,14 @@ const InitialState: State = {
 }
 
 export class CreateAppointment extends React.Component<{}, State> {
-    cardContent: ReactElement;
-    calendar: ReactElement;
-    snackbar: ReactElement;
-    menuItems: any[] = [];
     state = InitialState;
-    selectedPractitioner: User;
     private practitioners: User[];
     private user: User;
     private destroy$ = new Subject();
+    private cardContent: ReactElement;
+    private calendar: ReactElement;
+    private snackbar: ReactElement;
+    private menuItems: any[] = [];
     
     componentDidMount() {
         this.initialize();

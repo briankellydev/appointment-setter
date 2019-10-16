@@ -37,9 +37,8 @@ const KEYS = {
 
 export class CreateAccount extends React.Component<any, State> {
     state = InitialState;
-    cardContent: any;
-    snackbar: ReactElement;
 
+    private snackbar: ReactElement;
     private destroy$ = new Subject();
 
     componentDidMount() {
