@@ -31,50 +31,13 @@ export class GlobalHeader extends React.Component<any, State> {
     componentDidMount() {
         globalState.user.pipe(takeUntil(this.destroy$)).subscribe((user: User) => {
             this.setState({user: user}, () => {
-                this.menuContent = (
-                    <div className="Drawer-content text-center">
-                        {this.state.tenant ? (
-                            <div className="text-bold Drawer-header">
-                                {this.state.tenant.name}
-                            </div>
-                        ) : (<span></span>)}
-                        
-                            <Link to="/dashboard">
-                                <div className="menu-item">
-                                    Dashboard
-                                </div>
-                            </Link>
-                        
-                        {this.state.user && this.state.user.isAdmin ?
-                            (
-                                
-                                <Link to="/account/create">
-                                    <div className="menu-item">
-                                    Create An Account
-                                    </div>
-                                </Link>
-                                
-                            ) :
-                            (<span></span>)
-                        }
-                        
-                        <Link to="/appointment/create">
-                            <div className="menu-item">
-                                Schedule An Appointment
-                            </div>
-                        </Link>
-                    
-                        <Link to="/appointment/my">
-                            <div className="menu-item">
-                                My Appointments
-                            </div>
-                        </Link>
-                    </div>
-                );
+                this.renderMenu();
             });
         });
         globalState.tenant.pipe(takeUntil(this.destroy$)).subscribe((tenant: Tenant) => {
-            this.setState({tenant: tenant});
+            this.setState({tenant: tenant}, () => {
+                this.renderMenu();
+            });
         });
     }
 
@@ -138,5 +101,48 @@ export class GlobalHeader extends React.Component<any, State> {
     private logout() {
         localStorage.removeItem('x-auth-token');
         window.location.href = '/';
-      }
+    }
+
+    private renderMenu() {
+        this.menuContent = (
+            <div className="Drawer-content text-center">
+                {this.state.tenant ? (
+                    <div className="text-bold Drawer-header">
+                        {this.state.tenant.name}
+                    </div>
+                ) : (<span></span>)}
+                
+                    <Link to="/dashboard">
+                        <div className="menu-item">
+                            Dashboard
+                        </div>
+                    </Link>
+                
+                {this.state.user && this.state.user.isAdmin ?
+                    (
+                        
+                        <Link to="/account/create">
+                            <div className="menu-item">
+                            Create An Account
+                            </div>
+                        </Link>
+                        
+                    ) :
+                    (<span></span>)
+                }
+                
+                <Link to="/appointment/create">
+                    <div className="menu-item">
+                        Schedule An Appointment
+                    </div>
+                </Link>
+            
+                <Link to="/appointment/my">
+                    <div className="menu-item">
+                        My Appointments
+                    </div>
+                </Link>
+            </div>
+        );
+    }
 };
