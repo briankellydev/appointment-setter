@@ -31,7 +31,7 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 
 app.use(express.static(__dirname + '/public')); 
 
-app.get('/', function(req, res) {
+app.get('*', function(req, res) {
     res.sendFile('public/index.html', {root: __dirname}); // load our public/index.html file
 });
 //use users route for api/users

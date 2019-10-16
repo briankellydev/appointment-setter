@@ -46,7 +46,7 @@ export class Signup extends React.Component<any, State> {
             <div className="Signup">
                 <div className="Signup-main">
                     <h3>Sign Up</h3>
-                    <div className="text-bold">
+                    <div className="text-bold seriously">
                         DON'T USE REAL CREDENTIALS! THIS IS A PERSONAL PROJECT AND THE SERVER DETAILS ARE PUBLIC. SOMEONE COULD EASILY STEAL YOUR INFO. JUST USE A FAKE EMAIL AND PASSWORD. YOU'VE BEEN WARNED.
                     </div>
                     <form>
