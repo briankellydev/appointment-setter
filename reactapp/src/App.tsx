@@ -34,7 +34,7 @@ private checkLoginStatus() {
     if (!loggedIn) {
       this.setState({loading: false, initialLoginCheck: true});
       localStorage.removeItem('x-auth-token');
-      if (window.location.pathname !== '/' || window.location.pathname !== '/signup') {
+      if (window.location.pathname !== '/' && window.location.pathname !== '/signup') {
         window.location.href = '/';
       }
     } else {
