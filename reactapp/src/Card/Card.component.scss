@@ -1,0 +1,21 @@
+@import '../color-variables.scss';
+
+.Card {
+    width: 100%;
+    height: 100%;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 3px 3px 3px #CCCCCC;
+    margin: 10px 0;
+    .Card-header {
+        padding: 10px;
+        background-color: $headerColor;
+        color: white;
+        h3 {
+            margin: 0;
+        }
+    }
+    .Card-body {
+        padding: 10px;
+    }
+}

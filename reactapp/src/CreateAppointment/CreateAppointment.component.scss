@@ -1,0 +1,10 @@
+.CreateAppointment {
+    margin-top: 50px;
+    padding: 10px;
+    .schedule-card-content {
+        width: 100%;
+        .MuiFormControl-root {
+            width: 100%;
+        }
+    }
+}

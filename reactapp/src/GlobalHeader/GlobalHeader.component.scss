@@ -1,0 +1,27 @@
+@import '../color-variables.scss';
+
+.GlobalHeader {
+    padding: 10px;
+    border-bottom: 1px solid black;
+    font-size: 24px;
+    font-weight: bold;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    background-color: $headerColor;
+    color: white;
+    i {
+        cursor: pointer;
+    }
+    .right {
+        text-align: right;
+    }
+    .float-left {
+        float: left;
+    }
+    .float-right {
+        float: right;
+    }
+}

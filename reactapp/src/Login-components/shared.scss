@@ -1,0 +1,17 @@
+.Login, .Signup {
+    text-align: center;
+    &-main {
+        width: 50%;
+        padding: 20px;
+        border: 1px solid black;
+        border-radius: 3px;
+        margin: 30vh auto 0 auto;
+        box-shadow: 3px 3px 3px #CCCCCC;
+        h3 { 
+            margin: 0;
+        }
+        .row {
+            margin-top: 20px;
+        }
+    }
+}

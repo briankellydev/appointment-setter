@@ -42,7 +42,9 @@ const UserSchema = new mongoose.Schema({
       end: String,
       clientId: String,
       practitionerId: String,
-      notes: String
+      notes: String,
+      clientName: String,
+      practitionerName: String
     }
   ],
 });

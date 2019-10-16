@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server",
-    "build": "cd frontend && npm rebuild node-sass && cd ../ && npm install && cd frontend && npm install && npm run build && cd ../ && rm -rf public && mkdir public && cpx \"frontend/build/**/*\" public"
+    "build": "cd reactapp && npm rebuild node-sass && cd ../ && npm install && cd reactapp && npm install && npm run build && cd ../ && rm -rf public && mkdir public && cpx \"reactapp/build/**/*\" public"
   },
   "keywords": [],
   "author": "",

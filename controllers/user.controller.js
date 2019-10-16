@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const { User, validate } = require('../models/user.model');
 const dataController = require('./data.controller');
 const authController = require('./auth.controller');
+const moment = require('moment');
 const userController = {};
 
 userController.getCurrentUser = (req, res) => {
@@ -81,25 +82,25 @@ userController.getPractitioners = (req, res) => {
 }
 
 userController.getPractitionerById = (req, res) => {
-    User.findOne({ email: user.email }).then((user) => {
+    User.findOne({ email: req.user.email }).then((user) => {
         if (user) {
-            User.findOne({ tenantId: user.tenantId, userId: req.params.practitionerId }).then((practitioner) => {
+            User.findOne({ tenantId: user.tenantId, userId: req.query.practitionerId }).then((practitioner) => {
                 const mappedAppointments = practitioner.appointments.map((appt) => {
                     return {
                         start: appt.start,
                         end: appt.end,
                     }
+                }).filter((appt) => {
+                    return moment(appt.start).isAfter(moment().subtract(5, 'days'));
                 });
-                const mappedResponse = practitioner.map((pract) => {
-                    return {
-                        fullName: pract.fullName,
-                        userId: pract.userId,
-                        appointments: mappedAppointments
-                    }
-                });
+                const mappedResponse = {
+                    fullName: practitioner.fullName,
+                    userId: practitioner.userId,
+                    appointments: mappedAppointments
+                }
                 const token = authController.generateAuthToken(user);
                 res.header('x-auth-token', token).send(mappedResponse);
-            }).catch(() => {
+            }).catch((error) => {
                 res.status(500).send('Error fetching practitioner');
             });
         } else {
@@ -113,17 +114,17 @@ userController.getPractitionerById = (req, res) => {
 
 userController.createAppointment = (req, res) => {
     User.findOne({ email: req.user.email }).then((user) => {
-        const conflictExistsInUser = dataController.checkForAppointmentConflict(user.appointments, req.body.appointment);
+        const conflictExistsInUser = dataController.checkForAppointmentConflict(user.appointments, req.body);
         if (conflictExistsInUser) {
             res.status(500).send('Error creating appointment: Appointment in this timeslot exists');
         } else {
             User.findOne({ userId: req.body.practitionerId }).then((practitioner) => {
-                const conflictExistsInPractitioner = dataController.checkForAppointmentConflict(practitioner.appointments, req.body.appointment);
+                const conflictExistsInPractitioner = dataController.checkForAppointmentConflict(practitioner.appointments, req.body);
                 if (conflictExistsInPractitioner) {
                     res.status(500).send('Error creating appointment: Appointment in this timeslot exists');
                 } else {
-                    user.appointments.push(req.body.appointments);
-                    practitioner.appointments.push(req.body.appointments);
+                    user.appointments.push(req.body);
+                    practitioner.appointments.push(req.body);
                     user.save().then(() => {
                         practitioner.save().then(() => {
                             const token = authController.generateAuthToken(user);
@@ -142,19 +143,28 @@ userController.createAppointment = (req, res) => {
                 res.status(500).send('Error finding practitioner by id');
             });
         }
+    }).catch((error) => {
+        console.log(error);
+        res.status(500).send('Error finding user');
     });
 }
 
 userController.removeAppointment = (req, res) => {
     User.findOne({ email: req.user.email }).then((user) => {
         const userApptIndex = user.appointments.findIndex((appointment) => {
-            return appointment.time === req.body.time;
+            return moment(appointment.start).toISOString() === moment(req.body.start).toISOString() &&
+                    moment(appointment.clientId).toISOString() === moment(req.body.clientId).toISOString() &&
+                    moment(appointment.practitionerId).toISOString() === moment(req.body.practitionerId).toISOString();
         });
+        if (userApptIndex === -1) res.status(500).send('Appointment doesnt exist');
         user.appointments.splice(userApptIndex, 1);
         User.findOne({ userId: req.body.practitionerId }).then((practitioner) => {
             const practApptIndex = practitioner.appointments.findIndex((appointment) => {
-                return appointment.time === req.body.time;
+                return moment(appointment.start).toISOString() === moment(req.body.start).toISOString() &&
+                    moment(appointment.clientId).toISOString() === moment(req.body.clientId).toISOString() &&
+                    moment(appointment.practitionerId).toISOString() === moment(req.body.practitionerId).toISOString();
             });
+            if (userApptIndex === -1) res.status(500).send('Appointment doesnt exist');
             practitioner.appointments.splice(practApptIndex, 1);
             user.save().then(() => {
                 practitioner.save().then(() => {

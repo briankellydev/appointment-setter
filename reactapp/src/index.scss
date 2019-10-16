@@ -1,0 +1,92 @@
+@import 'assets/font-awesome/scss/font-awesome.scss';
+@import 'assets/bootstrap-grid.min.css';
+@import '~@fullcalendar/core/main.css';
+@import '~@fullcalendar/daygrid/main.css';
+@import '~@fullcalendar/timegrid/main.css';
+@import './color-variables.scss';
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.Popover-content {
+  width: 150px;
+  div {
+    padding: 10px;
+  }
+  .hover-menu:hover {
+    background-color: $primaryButton;
+    color: white;
+    cursor: pointer;
+  }
+}
+
+.Drawer-content {
+  .Drawer-header {
+    background-color: $headerColor;
+    color: white;
+  }
+  a {
+    text-decoration: none;
+  }
+  a:link, a:visited {
+    color: black;
+  }
+  a:hover {
+    color: white;
+  }
+  a:active {
+    color: black;
+  }
+  div {
+    border-bottom: 1px solid black;
+    padding: 10px;
+  }
+  .menu-item {
+      cursor: pointer;
+      &:hover {
+        background-color: $primaryButton;
+      }
+      &:hover > a {
+        color: white;
+      }
+  }
+}
+
+.MuiButton-containedPrimary {
+  background-color: $primaryButton !important;
+}
+
+.MuiButton-containedSecondary {
+  background-color: $secondaryButton !important;
+}
+
+.Mui-checked.MuiIconButton-colorSecondary {
+  color: $secondaryButton !important;
+}
+.MuiIconButton-colorSecondary:hover {
+  background-color: rgba(170,142,57, 0.2) !important;
+}
+
+.border-top {
+  border-top: 1px solid black;
+  cursor: pointer;
+}
