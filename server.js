@@ -18,7 +18,7 @@ const mdbDev = 'mongodb://localhost/appointment-setter';
 const mdbProd = 'mongodb://briankellydev:hiremen0w@ds335678.mlab.com:35678/heroku_t18rqgvk'
 //connect to mongodb
 mongoose
-  .connect(mdbDev, { useNewUrlParser: true })
+  .connect(mdbProd, { useNewUrlParser: true })
   .then(() => console.log('Connected to MongoDB...'))
   .catch(err => console.error('Could not connect to MongoDB...'));
 
