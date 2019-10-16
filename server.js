@@ -32,15 +32,16 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 
 app.use(express.static(__dirname + '/public')); 
 
-app.get('*', function(req, res) {
-    res.sendFile('public/index.html', {root: __dirname}); // load our public/index.html file
-});
 //use users route for api/users
 app.use('/api/users', usersRoute);
 // tenant routes
 app.use('/api/tenants', tenantsRoute);
 // auth
 app.use('/api/auth', authRoute);
+
+app.get('*', function(req, res) {
+  res.sendFile('public/index.html', {root: __dirname}); // load our public/index.html file
+});
 
 const port = process.env.PORT || 3001;
 // Procfile must run $env:myprivatekey = 'myprivatekey'
