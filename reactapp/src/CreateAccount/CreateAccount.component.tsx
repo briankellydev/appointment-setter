@@ -58,9 +58,7 @@ export class CreateAccount extends React.Component<any, State> {
     render() {
         return (
             <div className="CreateAccount">
-                <div className="row text-center">
-                    <div className="col-3"></div>
-                    <div className="col-6">
+                <div className="text-center CreateAccount-card">
                         <Card headerText="Create An Account" bodyHtml={
                         this.state.loading ? (<span></span>) : 
                         (
@@ -124,8 +122,6 @@ export class CreateAccount extends React.Component<any, State> {
                             </div>
                         )
                         }></Card>
-                    </div>
-                    <div className="col-3"></div>
                 </div>
                 {this.snackbar}
             </div>

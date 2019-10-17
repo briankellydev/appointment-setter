@@ -1,4 +1,11 @@
 .CreateAccount {
     margin-top: 50px;
     padding: 10px;
+    &-card {
+        width: 50%;
+        margin: auto;
+        @media screen and (max-width: 767px) {
+            width: 90%;
+        }
+    }
 }

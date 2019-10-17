@@ -146,12 +146,12 @@ export class Dashboard extends React.Component<any, State> {
             <div className="Dashboard">
                 <Card headerText="Admin Dashboard" bodyHtml={this.headerCardContent}></Card>
                 {this.state.loading ? (<span></span>) : (<div className="row">
-                    <div className="col-6">
+                    <div className="col-12 col-md-6">
                         {
                             (<Card headerText="Upcoming Appointments" bodyHtml={this.welcomeCardContent}></Card>)
                         }
                     </div>
-                    <div className="col-6">
+                    <div className="col-12 col-md-6">
                         <Card headerText="Actions" bodyHtml={this.actionsCardContent}></Card>
                     </div>
                 </div>)}

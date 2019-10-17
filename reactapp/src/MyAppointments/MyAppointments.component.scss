@@ -4,4 +4,7 @@
     Button {
         margin-top: 20px;
     }
+    @media screen and (max-width: 767px) {
+        margin-bottom: 20px;
+    }
 }

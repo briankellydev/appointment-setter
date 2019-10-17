@@ -73,7 +73,7 @@ export class GlobalHeader extends React.Component<any, State> {
                     }}
                     >
                         <div className="Popover-content">
-                            <div className="text-bold hover-menu">
+                            <div className="text-bold">
                                 {this.state.user.fullName}
                             </div>
                             <div className="border-top hover-menu" onClick={() => this.logout()}>

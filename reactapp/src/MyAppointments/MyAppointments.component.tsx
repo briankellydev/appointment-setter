@@ -70,10 +70,10 @@ export class MyAppointments extends React.Component<any, State> {
             <div className="MyAppointments">
                 <Card headerText="My Appointments" bodyHtml=""></Card>
                 <div className="row">
-                    <div className="col-6">
+                    <div className="col-12 col-md-6">
                         <Card headerText="My Calendar" bodyHtml={this.calendarCard}></Card>
                     </div>
-                    <div className="col-6">
+                    <div className="col-12 col-md-6">
                         <Card headerText="Appointment Details" bodyHtml={this.detailsCard}></Card>
                     </div>
                 </div>
@@ -138,7 +138,7 @@ export class MyAppointments extends React.Component<any, State> {
                 ) :
                 (<span></span>)}
             </div>
-        ) : (<div>Please select an appointment from the left.</div>)
+        ) : (<div>Please select an appointment time.</div>)
     }
 
     private getUser() {

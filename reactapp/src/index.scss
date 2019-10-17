@@ -90,3 +90,16 @@ code {
   border-top: 1px solid black;
   cursor: pointer;
 }
+
+.fc-right {
+  text-align: center;
+  .fc-button-group {
+    display: flex;
+    margin-left: 0;
+    margin-top: 5px;
+  }
+}
+
+.fc-day-header {
+  font-size: 12px;
+}

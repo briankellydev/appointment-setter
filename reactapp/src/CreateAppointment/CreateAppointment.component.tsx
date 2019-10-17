@@ -76,10 +76,10 @@ export class CreateAppointment extends React.Component<{}, State> {
             <div className="CreateAppointment">
                 <Card headerText="Schedule An Appointment" bodyHtml=""></Card>
                 <div className="row">
-                    <div className="col-6">
+                    <div className="col-12 col-md-6">
                         <Card headerText="Choose a Provider" bodyHtml={this.cardContent}></Card>
                     </div>
-                    <div className="col-6">
+                    <div className="col-12 col-md-6">
                         <Card headerText="" bodyHtml={this.calendar}></Card>
                     </div>
                 </div>
