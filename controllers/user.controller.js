@@ -46,6 +46,7 @@ userController.makeUser = (req, res) => {
 
 userController.createUser = (req, res) => {
     User.findById(req.user._id).then((user) => {
+        const token = authController.generateAuthToken(user);
         if (!user.isAdmin) res.header('x-auth-token', token).status(401).send('Unauthorized');
         userController.makeUser(req, res).then(() => {
             res.header('x-auth-token', token).send();
