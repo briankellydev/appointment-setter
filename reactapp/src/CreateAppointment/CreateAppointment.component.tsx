@@ -89,17 +89,22 @@ export class CreateAppointment extends React.Component<{}, State> {
     }
 
     private initialize() {
-        userService.getPractitioners().then((resp) => {
-            this.practitioners = resp.data;
-            resp.data.forEach((practitioner: User) => {
-                this.menuItems.push(
-                    (<MenuItem key={practitioner.userId} value={practitioner.fullName}>{practitioner.fullName}</MenuItem>)
-                );
+        userService.getCurrentUser().then((userResp) => {
+            userService.getPractitioners().then((resp) => {
+                this.practitioners = resp.data;
+                this.menuItems = [];
+                resp.data.forEach((practitioner: User) => {
+                    this.menuItems.push(
+                        (<MenuItem key={practitioner.userId} value={practitioner.fullName}>{practitioner.fullName}</MenuItem>)
+                    );
+                });
+                globalState.user.next(userResp.data);
+                this.renderCard();
+                this.renderCalendar();
+                this.setState({practitioners: resp.data});
             });
-            this.renderCard();
-            this.renderCalendar();
-            this.setState({practitioners: resp.data});
         });
+        
     }
 
     private handleDateClick = (event: any) => {
