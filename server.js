@@ -15,10 +15,10 @@ if (!config.get('myprivatekey')) {
   process.exit(1);
 }
 const mdbDev = 'mongodb://localhost/appointment-setter';
-const mdbProd = 'mongodb://briankellydev:hiremen0w@ds335678.mlab.com:35678/heroku_t18rqgvk'
+const mdbProd = 'mongodb://briankellydev:hiremen0w@cluster0-shard-00-00.sy7n0.mongodb.net:27017,cluster0-shard-00-01.sy7n0.mongodb.net:27017,cluster0-shard-00-02.sy7n0.mongodb.net:27017/default?ssl=true&replicaSet=atlas-zg2kp5-shard-0&authSource=admin&retryWrites=true&w=majority';
 //connect to mongodb
 mongoose
-  .connect(mdbDev, { useNewUrlParser: true })
+  .connect(mdbProd, { useNewUrlParser: true })
   .then(() => console.log('Connected to MongoDB...'))
   .catch(err => console.error('Could not connect to MongoDB...'));
 
